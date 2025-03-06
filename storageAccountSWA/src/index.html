@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.0.0/swagger-ui.min.css">
+</head>
+<body>
+    <h1>API Documentation</h1>
+    <div>
+        <h2>Available APIs</h2>
+        <div id="service-list">
+            <!-- row -->
+        </div>
+    </div>
+    <div id="swagger-ui"></div>
+
+    <!-- Load the dynamically updated swagger-initializer.js -->
+    <script src="swagger-initializer.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("Swagger Files Loaded:", window.swaggerFiles);
+
+            const serviceList = document.getElementById("service-list");
+            if (window.swaggerFiles && window.swaggerFiles.length > 0) {
+                serviceList.innerHTML = "";
+                window.swaggerFiles.forEach(file => {
+                    const button = document.createElement("button");
+                    button.textContent = file.replace(".json", "");
+                    button.onclick = function () {
+                        loadSwaggerUI(file);
+                    };
+                    serviceList.appendChild(button);
+                });
+            } else {
+                serviceList.innerHTML = "<p>⚠ No API files found in swagger-initializer.js.</p>";
+            }
+        });
+
+        function loadSwaggerUI(apiFile) {
+            const ui = SwaggerUIBundle({
+                url: apiFile,
+                dom_id: "#swagger-ui",
+                deepLinking: true,
+                presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+                layout: "StandaloneLayout"
+            });
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.0.0/swagger-ui-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.0.0/swagger-ui-standalone-preset.min.js"></script>
+</body>
+</html>

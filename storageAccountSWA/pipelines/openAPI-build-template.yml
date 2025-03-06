@@ -1,0 +1,36 @@
+trigger: none #remove 'none' if you want this to run automatically 
+# - main #uncomment if you want this to run automatically
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- group: <swa-name>-variables
+
+steps:
+- script: |
+    mkdir -p $(STAGING_FOLDER)
+    echo "Staging folder is $(STAGING_FOLDER)"
+    az storage blob download-batch \
+      --account-name $(STORAGE_ACCOUNT) \
+      --source $(CONTAINER_NAME) \
+      --destination $(STAGING_FOLDER) \
+      --sas-token "$(OPENAPI_SAS_TOKEN)"
+  displayName: "Download Swagger assets from Azure Storage"
+
+- task: UsePythonVersion@0
+  displayName: "Use Python 3.x"
+  inputs:
+    versionSpec: '3.x'
+
+- script: |
+    python3 src/process-swagger.py
+  displayName: "Run Python script to update Swagger files"
+
+- script: |
+    echo "Creating container 'staging' in Azure Storage"
+    az storage container create --name staging --account-name $(STORAGE_ACCOUNT) --sas-token "$(OPENAPI_SAS_TOKEN)"
+    
+    echo "Uploading contents of $(STAGING_FOLDER) to container 'staging'"
+    az storage blob upload-batch --account-name $(STORAGE_ACCOUNT) --destination staging --source $(STAGING_FOLDER) --sas-token "$(OPENAPI_SAS_TOKEN)"
+  displayName: "Upload Swagger assets to 'staging' container"
