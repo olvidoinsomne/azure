@@ -1,0 +1,11 @@
+{
+    "environments": [
+        {
+            "name": "environment name",
+            "environment": "<Environment designation>", //Dev, Test, Prod
+            "spName": "<spName>", //Service Principal ID
+            "spPassword": "<spPassword>", //Service Principal Password
+            "csvFile": "kv-<env>.csv" //CSV file name
+        }
+    ]
+}
