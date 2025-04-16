@@ -13,7 +13,7 @@
 ##*===============================================
 
 ## Variables: 
-	$workingDirectory = "/Users/tjones/gits/Dev/"
+	$workingDirectory = "/Users/tjones/gits/Dev/" ## Working directory for csvs and config
 ##*===============================================
 
 ##*===============================================
