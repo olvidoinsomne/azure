@@ -14,6 +14,7 @@
 
 ## Variables: 
 	$workingDirectory = "/Users/tjones/gits/Dev/" ## Working directory for csvs and config
+    $tenantId = "<your-tenant-ID" ## Tenant ID for the service principal
 ##*===============================================
 
 ##*===============================================
@@ -43,7 +44,7 @@ function bulkAddKVValues {
 	$securePassword = ConvertTo-SecureString $spPassword -AsPlainText -Force
 	$credential = New-Object -typename System.Management.Automation.PSCredential `
 		-argumentlist $spName, $securePassword
-	Connect-AzAccount -Credential $credential -TenantId "dd0a7738-e5d7-49ed-8a01-42e0fd15076c" -ServicePrincipal | Out-Null
+	Connect-AzAccount -Credential $credential -TenantId $tenantID -ServicePrincipal | Out-Null
 	$subscriptionInfo = Get-AzSubscription
 	Write-Host "Logged into" $subscriptionInfo.Name
 
