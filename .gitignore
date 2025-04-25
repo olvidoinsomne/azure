@@ -1,0 +1,55 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS metadata folders
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.DocumentRevisions-V100
+.fseventsd
+
+# macOS resource forks
+._*
+
+# macOS thumbnail cache files
+Desktop DB
+Desktop DF
+
+# macOS Trash folder
+.Trashes
+
+# Dropbox sync conflict files
+*.dropbox
+.dropbox.cache/
+
+# iCloud files
+*.icloud
+
+# Windows crap if dual-booting or someone shares a drive
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+*.swp
+*.lock
+*.tmp
+
+# VS Code settings (if you're using it)
+.vscode/
+
+# Node.js projects (optional, if relevant)
+node_modules/
+
+# Python cache files (optional, if relevant)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
